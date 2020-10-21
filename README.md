@@ -73,7 +73,6 @@ umap_plot = umap(r$reductions$PCA,n_neighbors = 30,spread = 3,
                  n_components = 2,metric = "cosine",verbose = T)
 par(las=1,bty="l")
 plot(umap_plot,pch=21,bg=string.to.colors(r$clusters$PCA$community),xlab="UMAP 1",ylab="UMAP 2",main="All cells")
-
 ```
 
 In order to better interpret the cluster we can look at the correlation between the mean expression profile of each cluster :
@@ -88,8 +87,28 @@ rownames(Correlation_cluster) = 1:ncol(Correlation_cluster)
 Order_cluster = pheatmap(Correlation_cluster,clustering_method = "ward.D")
 Order_cluster = Order_cluster$tree_col$order
 ```
-The dataset of course includes T-cells (Trac, Cd3d) and Dendritic cells (expressing Ccl17, Ccl22, Fscn1 and co-stimulatory molecules such as Cd40 and Cd86) but also NK cells (Ncr1, Klrb1b) and plasma cells (Igkc, Ighm, Mzb1).
+The dataset of course includes T-cells (Trac, Cd3d) and Dendritic cells (expressing Ccl17, Ccl22, Fscn1 and co-stimulatory molecules such as Cd40 and Cd86) but also a small contamination by NK (Ncr1, Klrb1b) and plasma cells (Igkc, Ighm, Mzb1).
 
+We can now perform the demultiplexing of the PIC/doublets. We first load the functions from the script :
 
+```r
+source("Bayesian_PIC_seq.R")
+```
+We now compute the normalzied mean expression profile of each cluster :
 
+```r
+K = length(unique(r$clusters$PCA$community))
+Singlet_mean_profile = matrix(0,nrow = length(Selected_genes_Fitting),ncol = K)
+
+Singlet_data = data_count[Selected_genes_Fitting,Gating_count!="Doublet"]
+
+for (k in 1:K) {
+  M = Singlet_data[,r$clusters$PCA$community==k]
+  M = rowSums(M)
+  M = M/sum(M)
+  Singlet_mean_profile[,k] = M
+}
+
+```
+Now we can perform the demultiplexing through Rstan : be careful as it requires significant amount of computational ressources ! 
 
