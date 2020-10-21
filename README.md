@@ -10,7 +10,8 @@ Analysis of the conventionnal single-cell data can be performed by any package o
 
 All the core functions are stored in the **Bayesian_PIC_seq.R** script.
 
-# Example of use :
+Example of use
+--------------
 
 Here we will use the data provided by the authors of the paper "Dissecting cellular crosstalk by sequencing physically interacting cells" : they are fully available on the GEO website (GEO accession number : GSE135382). We focused on the in-vitro data where mouse monocytes derived Dendritic Cells (moDCs) where put in contact with T-cells. PIC and single-cells were sequenced 3h, 20h and 48h post co-culture. 
 
