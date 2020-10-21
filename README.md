@@ -110,5 +110,15 @@ for (k in 1:K) {
 }
 
 ```
-Now we can perform the demultiplexing through Rstan : be careful as it requires significant amount of computational ressources ! 
+Now we can perform the demultiplexing through Rstan using the PIC_demultiplexing : be careful as it requires significant amount of computational ressources ! 
+
+```r
+Data_to_fit = data_count[Selected_genes_Fitting,Gating_count=="Doublet"]
+Doublet_time = Time_point_count[Gating_count=="Doublet"]
+Doublet_time = factor(Doublet_time,levels = c("3h","20h","48h"))
+Alpha_table = PIC_demultiplexing(PIC_Expression_matrix = Data_to_fit[],N_cores = 14,Singlet_mean_profile = Q)
+
+```
+The **Alpha_table** contains the contribution of each cluster into each PIC.
+
 
