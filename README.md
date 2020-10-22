@@ -74,8 +74,9 @@ umap_plot = umap(r$reductions$PCA,n_neighbors = 30,spread = 3,
 par(las=1,bty="l")
 plot(umap_plot,pch=21,bg=string.to.colors(r$clusters$PCA$community),xlab="UMAP 1",ylab="UMAP 2",main="All cells")
 ```
-<img src="UMAP_single_cell.png" alt="drawing" width="600"/>
-
+<p align="center">
+<img src="UMAP_single_cell.png" alt="drawing" width="1500"/>
+</p>
 
 
 In order to better interpret the cluster we can look at the correlation between the mean expression profile of each cluster :
