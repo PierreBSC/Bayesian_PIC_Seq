@@ -181,11 +181,6 @@ Ternary_QC_plot = function(Alpha_table,Classification_clusters,Experimental_cond
 
 ##How to detect genes specifically expressed in PIC-seq
 
-gene = "Foxp3"
-X = Data_to_fit[gene,]
-p = Q%*%Alpha_table
-L = colSums(Data_to_fit)
-
 NB_log_likelihood = function(X,Expected_lambda){
   mean_gene_expression = mean(X)
   var_gene_expres = var(X)
