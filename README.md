@@ -128,12 +128,12 @@ The **Alpha_table** contains the contribution of each cluster into each PIC with
 The result of the fitting can be visualized using the **Ternary_QC_plot** function. The user only needs to provide the classification of the clusters, that is to say indicating to which major cell type each cluster corresponds to. For instance, here clusters are either classified moDCs, T-cells and 'Others'. Additionally, a vector describing to which experimental condition a PIC belongs can be provided to generate separate plots.
 
 ```r
-Classification_clusters = list(DCs = c(1,2,3,4),T_cells = c(5,6,7,8),Others=c(9,10) # Classification of the clusters has to be presented as a list of length three
+Classification_clusters = list(DCs = c(1,2,3,4),T_cells = c(5,6,7,8),Others=c(9,10) # Classification of the clusters has to be provided as a list of length three
 Ternary_QC_plot = function(Alpha_table=Alpha_table,Classification_clusters,Experimental_condition=Doublet_time)
 ```
 <p align="center">
-<img src="Ternary_plot.png" alt="drawing" width="1500"/>
+<img src="Ternary_plot.png" alt="drawing" width="2500"/>
 </p>
-
+The data are displayed using a Ternary plot : we can see that the majority of the contribution come from DCs and T-cell clusters and not from other cell types, therefore validating our approach. Interestingly the respective contribution of DCs and T-cells drastically change over-time : at 3h post co-culture most of the reads originate from DCs while at 48h they mostly come from T-cells.
 
 
