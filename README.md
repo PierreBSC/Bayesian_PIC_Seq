@@ -123,6 +123,17 @@ Doublet_time = factor(Doublet_time,levels = c("3h","20h","48h"))
 Alpha_table = PIC_demultiplexing(PIC_Expression_matrix = Data_to_fit[],N_cores = 14,Singlet_mean_profile = Q)
 
 ```
-The **Alpha_table** contains the contribution of each cluster into each PIC.
+The **Alpha_table** contains the contribution of each cluster into each PIC with each column corresponding to a cell and each row to a single-cell cluster. Of course each column sums to one.
+
+The result of the fitting can be visualized using the **Ternary_QC_plot** function. The user only needs to provide the classification of the clusters, that is to say indicating to which major cell type each cluster corresponds to. For instance, here clusters are either classified moDCs, T-cells and 'Others'. Additionally, a vector describing to which experimental condition a PIC belongs can be provided to generate separate plots.
+
+```r
+Classification_clusters = list(DCs = c(1,2,3,4),T_cells = c(5,6,7,8),Others=c(9,10) # Classification of the clusters has to be presented as a list of length three
+Ternary_QC_plot = function(Alpha_table=Alpha_table,Classification_clusters,Experimental_condition=Doublet_time)
+```
+<p align="center">
+<img src="Ternary_plot.png" alt="drawing" width="1500"/>
+</p>
+
 
 
